@@ -1,44 +1,29 @@
-// import { Injectable, inject } from '@angular/core';
-// import {
-//   HttpEvent,
-//   HttpHandler,
-//   HttpInterceptor,
-//   HttpRequest,
-//   HttpErrorResponse
-// } from '@angular/common/http';
-// import { Observable, catchError, throwError } from 'rxjs';
+import { inject } from '@angular/core';
+import { HttpRequest, HttpHandlerFn, HttpEvent, HttpInterceptorFn, HttpErrorResponse } from '@angular/common/http';
+import { catchError, throwError, Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { AuthService } from './auth.service';
 
-// import { Router } from '@angular/router';
-// import { AuthService } from './auth.service';
+export const authInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: HttpHandlerFn): Observable<HttpEvent<any>> => {
+  const authService = inject(AuthService);
+  const router = inject(Router);
 
-// @Injectable()
-// export class AuthInterceptor implements HttpInterceptor {
+  const token = authService.getAuthorizationToken();
 
-//   private authService = inject(AuthService);
-//   private router = inject(Router);
+  const authReq = req.clone({
+    setHeaders: {
+      ...(token && { Authorization: `Bearer ${token}` }),
+      'ngrok-skip-browser-warning': 'true',
+      // 'localhost:8080': 'true'
+    }
+  });
 
-//   intercept(
-//     req: HttpRequest<any>,
-//     next: HttpHandler
-//   ): Observable<HttpEvent<any>> {
-
-//     const token = this.authService.getAuthorizationToken();
-
-//   const authReq = req.clone({
-//     setHeaders: {
-//       ...(token && { Authorization: `Bearer ${token}` }),
-//       'ngrok-skip-browser-warning': 'true'
-//     }
-//   });
-
-
-//     return next.handle(authReq).pipe(
-//       catchError((error: HttpErrorResponse) => {
-//         if (error.status === 401) {
-//           this.authService.logout();
-//         }
-//         return throwError(() => error);
-//       })
-//     );
-//   }
-// }
+  return next(authReq).pipe(
+    catchError((error: HttpErrorResponse) => {
+      if (error.status === 401) {
+        authService.logout();
+      }
+      return throwError(() => error);
+    })
+  );
+};
