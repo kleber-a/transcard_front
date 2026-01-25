@@ -1,0 +1,55 @@
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+  <div class="bg-[#09090b] border border-[#27272a] p-4 rounded-xl">
+    <div class="flex items-center gap-3">
+      <div class="p-2 bg-[#10b981]/10 rounded-lg"><i class="fas fa-credit-card text-[#10b981]"></i></div>
+      <div>
+        <div class="text-2xl font-bold leading-none">{{ totalCards }}</div>
+        <div class="text-xs text-[#a1a1aa] mt-1">Total de Cartões</div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+<div class="bg-[#09090b] border border-[#27272a] rounded-xl overflow-hidden shadow-sm">
+  <table class="w-full text-left">
+    <thead class="bg-[#18181b] text-[#a1a1aa] text-xs uppercase tracking-wider">
+      <tr>
+        <th class="px-6 py-4 font-medium">Número</th>
+        <th class="px-6 py-4 font-medium">Nome</th>
+        <th class="px-6 py-4 font-medium">Tipo</th>
+        <th class="px-6 py-4 font-medium">Status</th>
+        <th class="px-6 py-4 font-medium text-right">Ações</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-[#27272a]">
+      <tr *ngFor="let card of filteredCards()" class="hover:bg-[#18181b]/50 transition-colors">
+        <!-- <td class="px-6 py-4 font-mono text-sm text-[#10b981]">{{ card.number }}</td> -->
+        <td class="px-6 py-4 text-sm font-medium">{{ card.name }}</td>
+        <td class="px-6 py-4">
+          <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase"
+                [ngClass]="{
+                  'bg-blue-500/10 text-blue-400 border border-blue-500/20': card.type==='ESTUDANTE',
+                  'bg-zinc-500/10 text-zinc-400 border border-zinc-500/20': card.type==='COMUM',
+                  'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20': card.type==='TRABALHADOR'
+                }">
+            {{ card.type }}
+          </span>
+        </td>
+        <td class="px-6 py-4">
+          <div class="flex items-center gap-2">
+            <span class="h-2 w-2 rounded-full" [ngClass]="card.status ? 'bg-[#10b981]' : 'bg-zinc-600'"></span>
+            <span class="text-sm" [ngClass]="card.status ? 'text-white' : 'text-[#a1a1aa]'">
+              {{ card.status ? 'Ativo' : 'Inativo' }}
+            </span>
+          </div>
+        </td>
+        <td class="px-6 py-4 text-right">
+          <button (click)="toggleStatus(card)"
+                  class="text-xs font-medium hover:underline text-[#a1a1aa] hover:text-white">
+            {{ card.status ? 'Desativar' : 'Ativar' }}
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

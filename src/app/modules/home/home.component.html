@@ -1,0 +1,28 @@
+<div class="min-h-screen bg-[#09090b] text-[#fafafa] font-sans">
+  <header class="border-b border-[#27272a] bg-[#09090b]/95 backdrop-blur">
+    <div class="container mx-auto flex h-16 items-center justify-between px-4">
+      <div class="flex items-center space-x-3">
+        <div class="bg-[#10b981] p-2 rounded-lg shadow-[0_0_15px_rgba(16,185,129,0.3)]">
+          <i class="fas fa-bus text-white text-xl"></i>
+        </div>
+        <div>
+          <h1 class="font-bold text-lg leading-none">TransCard</h1>
+          <span class="text-xs text-[#a1a1aa]">Sistema de Gestão de Cartões</span>
+        </div>
+      </div>
+
+      <nav class="flex items-center space-x-1 bg-[#18181b] p-1 rounded-md border border-[#27272a]">
+        <button routerLink="users" routerLinkActive="bg-[#10b981] text-white" class="px-4 py-1.5 rounded-sm transition-all text-sm font-medium hover:text-white">
+          Usuários
+        </button>
+        <button routerLink="cards" routerLinkActive="bg-[#10b981] text-white" class="px-4 py-1.5 rounded-sm transition-all text-sm font-medium hover:text-white">
+          Cartões
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container mx-auto p-6">
+    <router-outlet></router-outlet>
+  </main>
+</div>
