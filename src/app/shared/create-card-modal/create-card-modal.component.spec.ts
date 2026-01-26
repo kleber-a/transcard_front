@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { TableStatusComponent } from './table-status.component';
+import { CreateCardModalComponent } from './create-card-modal.component';
 
-describe('TableStatusComponent', () => {
-  let component: TableStatusComponent;
-  let fixture: ComponentFixture<TableStatusComponent>;
+describe('CreateCardModalComponent', () => {
+  let component: CreateCardModalComponent;
+  let fixture: ComponentFixture<CreateCardModalComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TableStatusComponent ]
+      declarations: [ CreateCardModalComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TableStatusComponent);
+    fixture = TestBed.createComponent(CreateCardModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

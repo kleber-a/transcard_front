@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { AddCardModalComponent } from './add-card-modal.component';
+import { AddCardModalComponent } from './user-card-modal.component';
 
 describe('AddCardModalComponent', () => {
   let component: AddCardModalComponent;

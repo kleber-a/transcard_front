@@ -1,0 +1,95 @@
+<div class="bg-[#020609] border border-gray-800 w-full max-w-md rounded-xl p-6 shadow-2xl">
+
+  <!-- HEADER -->
+  <div class="flex justify-between items-start mb-6">
+    <div>
+      <h2 class="text-xl font-bold text-white">Adicionar Cartão</h2>
+      <p class="text-gray-400 text-sm mt-1">
+        Adicione um novo cartão de ônibus para
+        <span class="text-white font-medium">{{ data.userName }}</span>.
+      </p>
+    </div>
+
+    <button
+      type="button"
+      (click)="close()"
+      class="text-gray-500 hover:text-white transition-colors"
+    >
+      ✕
+    </button>
+  </div>
+
+  <!-- FORM -->
+  <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-4">
+
+    <!-- NUMERO -->
+    <div>
+      <label class="block text-sm font-medium text-gray-300 mb-1.5">
+        Número do Cartão
+      </label>
+      <input
+        type="number"
+        formControlName="numberCard"
+        placeholder="Ex: 1001234567"
+        class="w-full bg-[#090e14] border-2 border-[#10b981] rounded-lg
+               px-4 py-2.5 text-gray-200 placeholder-gray-600
+               focus:outline-none focus:ring-1 focus:ring-[#10b981]"
+      >
+    </div>
+
+    <!-- NOME -->
+    <div>
+      <label class="block text-sm font-medium text-gray-300 mb-1.5">
+        Nome do Cartão
+      </label>
+      <input
+        type="text"
+        formControlName="fullName"
+        placeholder="Ex: Cartão Principal"
+        class="w-full bg-[#090e14] border border-gray-800 rounded-lg
+               px-4 py-2.5 text-gray-200 placeholder-gray-600
+               focus:outline-none focus:border-[#10b981] transition-colors"
+      >
+    </div>
+
+    <!-- TIPO -->
+    <div>
+      <label class="block text-sm font-medium text-gray-300 mb-1.5">
+        Tipo do Cartão
+      </label>
+      <select
+        formControlName="typeCard"
+        class="w-full bg-[#090e14] border border-gray-800 rounded-lg
+               px-4 py-2.5 text-gray-200
+               focus:outline-none focus:border-[#10b981] transition-colors"
+      >
+        <option value="COMUM">Comum</option>
+        <option value="ESTUDANTE">Estudante</option>
+        <option value="TRABALHADOR">Trabalhador</option>
+      </select>
+    </div>
+
+    <!-- AÇÕES -->
+    <div class="flex justify-end gap-3 mt-8">
+      <button
+        type="button"
+        (click)="close()"
+        class="px-6 py-2.5 border border-gray-800 rounded-xl
+               text-gray-300 font-medium hover:bg-gray-800 transition-colors"
+      >
+        Cancelar
+      </button>
+
+      <button
+        type="submit"
+        [disabled]="form.invalid"
+        class="px-6 py-2.5 bg-[#00c881] hover:bg-[#00ad70]
+               disabled:opacity-50 disabled:cursor-not-allowed
+               text-black font-bold rounded-xl transition-colors"
+      >
+        Adicionar
+      </button>
+    </div>
+
+  </form>
+</div>

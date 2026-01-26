@@ -66,12 +66,7 @@ export class AuthService {
   logout(): void {
     const url = this.#router.url;
     this.clearSession();
-
-    if (url.startsWith('/admin')) {
-      this.#router.navigate(['/admin/login']);
-    } else {
-      this.#router.navigate(['/customer/login']);
-    }
+    this.#router.navigate(['login']);
   }
 
   // TOKEN
