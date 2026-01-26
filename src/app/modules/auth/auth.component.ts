@@ -3,6 +3,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-auth',
@@ -18,6 +19,7 @@ export class AuthComponent implements OnInit {
   private fb = inject(FormBuilder)
   private router = inject(Router)
   private authService = inject(AuthService)
+  private toastr = inject(ToastrService)
 
 
 
@@ -35,9 +37,12 @@ export class AuthComponent implements OnInit {
       this.authService.login(this.loginForm.value).subscribe({
         next: res => {
           this.isLoading.set(false);
-           this.router.navigate(['/home']);
+          this.toastr.success('Login efetuado com sucesso!', 'Sucesso');
+          this.router.navigate(['/home']);
+
         },
         error: err => {
+          this.toastr.error('Usuário ou senha inválidos!', 'Erro');
           this.isLoading.set(false);
         }
       })
