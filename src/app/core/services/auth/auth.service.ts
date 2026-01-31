@@ -33,11 +33,6 @@ export class AuthService {
   private readonly TOKEN_KEY = 'access_token';
   private readonly USER_KEY = 'auth_user';
 
-  constructor(
-    // private readonly http: HttpClient,
-    // private readonly router: Router
-  ) { }
-
   #http = inject(HttpClient)
   #router = inject(Router)
 
@@ -63,10 +58,6 @@ export class AuthService {
         })
       );
   }
-
-
-  // register(body: any) {
-  // }
 
   // LOGOUT
   logout(): void {

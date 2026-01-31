@@ -43,9 +43,6 @@ export class HttpService {
   putGeneric<T>(endpoint: string, body: any): Observable<T> {
     console.log('body',body)
     const url = `${this.apiUrl}/${endpoint}`;
-    // const httpOptions = {
-    //   headers: new HttpHeaders()
-    // }
     return this.#http.put<T>(url, body).pipe(
       catchError(err => this.handleError(err))
     );
