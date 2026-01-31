@@ -24,9 +24,9 @@ export class CardsService {
       params.typeCard = query.typeCard;
     }
 
-    if (query?.status) {
-      params.status = query.status;
-    }
+   if (typeof query?.status === 'boolean') {
+    params.status = query.status;
+  }
 
     if (query?.page || query?.page === 0) {
       params.page = query.page;

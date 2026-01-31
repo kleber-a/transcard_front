@@ -24,9 +24,9 @@
       [(ngModel)]="filterStatus"
       (change)="onFilterChange()"
       class="w-full sm:w-auto bg-[#09090b] border border-[#27272a] text-white px-3 py-2 rounded-md focus:border-[#10b981] outline-none">
-      <option value>Todos os status</option>
-      <option [value]="true">Ativo</option>
-      <option [value]="false">Inativo</option>
+        <option [ngValue]="null">Todos os status</option>
+        <option [ngValue]="true">Ativo</option>
+        <option [ngValue]="false">Inativo</option>
     </select>
   </div>
 </div>

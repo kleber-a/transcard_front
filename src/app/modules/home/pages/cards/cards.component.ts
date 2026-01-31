@@ -21,7 +21,7 @@ export class CardsComponent implements OnInit {
   cards: CardTable[] = [];
   filterName = '';
   filterType = '';
-  filterStatus:  boolean = true;
+  filterStatus: boolean | null = null;
   page = 0;
   size = 5;
   totalPages = 0
@@ -65,7 +65,7 @@ export class CardsComponent implements OnInit {
       page: this.page,
       name: this.filterName || undefined,
       typeCard: this.filterType || undefined,
-      status: this.filterStatus
+      status: this.filterStatus ?? undefined
     });
   }
 
@@ -75,7 +75,7 @@ export class CardsComponent implements OnInit {
       page: this.page,
       name: this.filterName || undefined,
       typeCard: this.filterType || undefined,
-      status: this.filterStatus
+      status: this.filterStatus ?? undefined
     });
   }
 
