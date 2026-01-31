@@ -61,9 +61,4 @@ export class CardsService {
     return this.#httpService.deleteGeneric(endpoint)
   }
 
-  // putCards(user: User, id?: string) {
-  //   const endpoint = `${this.users}/${id}`
-  //   return this.#httpService.putGeneric(endpoint, user)
-  // }
-
 }

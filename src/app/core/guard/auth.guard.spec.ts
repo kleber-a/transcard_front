@@ -1,17 +1,17 @@
-import { TestBed } from '@angular/core/testing';
-import { CanActivateFn } from '@angular/router';
+import { inject } from '@angular/core';
+import { CanActivateFn, Router } from '@angular/router';
+import { AuthService } from '../services/auth/auth.service';
 
-import { authGuard } from './auth.guard';
+export const authGuard: CanActivateFn = (route, state) => {
+  const authService = inject(AuthService);
+  const router = inject(Router);
 
-describe('authGuard', () => {
-  const executeGuard: CanActivateFn = (...guardParameters) => 
-      TestBed.runInInjectionContext(() => authGuard(...guardParameters));
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-  });
+  const token = authService.getAuthorizationToken();
 
-  it('should be created', () => {
-    expect(executeGuard).toBeTruthy();
-  });
-});
+  if (token) {
+    return true;
+  } else {
+    return router.createUrlTree(['/login']);
+  }
+};

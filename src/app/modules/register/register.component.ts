@@ -1,4 +1,3 @@
-// register.component.ts
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';

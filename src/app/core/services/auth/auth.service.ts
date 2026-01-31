@@ -37,7 +37,7 @@ export class AuthService {
   #router = inject(Router)
 
 
-  // 🔐 LOGIN
+  // LOGIN
   login(payload: LoginPayload, screen?: string): Observable<AuthResponse> {
     return this.#http
       .post<AuthResponse>(`${this.apiUrl}/auth/login`, payload)
