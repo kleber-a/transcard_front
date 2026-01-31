@@ -33,7 +33,6 @@ export class HttpService {
   }
 
   postGeneric<T>(endpoint: string, body?: unknown): Observable<T> {
-    console.log('postGeneric')
     const url = `${this.apiUrl}/${endpoint}`;
     return this.#http.post<T>(url, body ?? null).pipe(
       catchError(err => this.handleError(err))
@@ -41,7 +40,6 @@ export class HttpService {
   }
 
   putGeneric<T>(endpoint: string, body: any): Observable<T> {
-    console.log('body',body)
     const url = `${this.apiUrl}/${endpoint}`;
     return this.#http.put<T>(url, body).pipe(
       catchError(err => this.handleError(err))

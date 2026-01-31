@@ -14,7 +14,6 @@ export class CardsService {
 
 
   getCards(query?: CardFilters) {
-    console.log('query',query)
     let params: any = {};
 
     if (query?.name) {
@@ -42,8 +41,6 @@ export class CardsService {
   }
 
   postCards(userId: string | number,card: Card){
-    console.log('userId',userId)
-    console.log('card',card)
     const endpoint = `${this.cards}/${userId}`
 
     return this.#httpService.postGeneric(endpoint, card)

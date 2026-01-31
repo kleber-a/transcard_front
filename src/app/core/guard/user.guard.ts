@@ -9,7 +9,6 @@ export const userGuard: CanActivateFn = (route, state) => {
   const token = authService.getAuthorizationToken();
   const user = authService.getUser();
 
-  console.log(user)
   if (token && user?.role === 'USER') {
     return true;
   }

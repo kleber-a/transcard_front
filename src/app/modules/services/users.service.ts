@@ -41,8 +41,6 @@ export class UsersService {
 
   patchUsers(user: User, id?: string): Observable<User> {
     const endpoint = `${this.users}/${id}`
-    console.warn('endpoint',endpoint)
-    console.warn('user',user)
     return this.#httpService.patchGeneric<User>(endpoint, user)
   }
 
