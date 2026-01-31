@@ -94,7 +94,7 @@ export class UsersComponent implements OnInit {
         this.setUsers();
       },
       error: err => {
-        this.#toastr.error('Error ao criar usuário!', 'Erro');
+        this.#toastr.error(err.error.message, 'Erro');
       }
     })
   }
