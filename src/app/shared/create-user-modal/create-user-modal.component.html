@@ -33,13 +33,13 @@
       <label class="block text-sm font-medium text-gray-300 mb-1.5">Nome</label>
       <input
         type="text"
-        formControlName="fullName"
+        formControlName="name"
         placeholder="Digite o nome completo"
         class="w-full bg-[#090e14] border-2 rounded-lg px-4 py-2.5
                text-gray-200 placeholder-gray-600
                focus:outline-none focus:ring-1 transition-colors"
-        [class.border-[#10b981]]="form.get('fullName')?.valid"
-        [class.border-red-500]="form.get('fullName')?.invalid && form.get('fullName')?.touched"
+        [class.border-[#10b981]]="form.get('name')?.valid"
+        [class.border-red-500]="form.get('name')?.invalid && form.get('name')?.touched"
       >
     </div>
 

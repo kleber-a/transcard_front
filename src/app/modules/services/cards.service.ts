@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpService } from '../../core/services/http/http.service';
-import { Card } from '../../core/models/Card';
+import { Card, CardFilters } from '../../core/models/Card';
 import { User } from '../../core/models/User';
 
 @Injectable({
@@ -13,7 +13,7 @@ export class CardsService {
   private readonly cards = 'cards'
 
 
-  getCards(query?: any) {
+  getCards(query?: CardFilters) {
     console.log('query',query)
     let params: any = {};
 

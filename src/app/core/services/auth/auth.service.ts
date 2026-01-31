@@ -48,16 +48,22 @@ export class AuthService {
       .post<AuthResponse>(`${this.apiUrl}/auth/login`, payload)
       .pipe(
         tap(res => {
-        if (res.user.role === screen) {
           this.setAuthorizationToken(res.token);
           this.setUser(res.user);
-        } else {
-          this.clearSession();
-          console.warn('Login negado: role não permitida', res.user.role);
-        }
         })
       );
   }
+
+   register(payload: LoginPayload, screen?: string): Observable<AuthResponse> {
+    return this.#http
+      .post<AuthResponse>(`${this.apiUrl}/auth/register`, payload)
+      .pipe(
+        tap(res => {
+          this.#router.navigate(['/login']);
+        })
+      );
+  }
+
 
   // register(body: any) {
   // }

@@ -11,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./table-cards.component.scss'],
   imports: [CommonModule, MatIconModule]
 })
-export class TableCardsComponent implements OnChanges {
+export class TableCardsComponent {
 
   @Input() cards: CardTable[] = [];
   @Input() paginaAtual = 1;
@@ -23,20 +23,6 @@ export class TableCardsComponent implements OnChanges {
   #toastr = inject(ToastrService)
 
 
-  // Lógica simples de paginação
-  // totalItens = 15;
-  // paginaAtual = 1;
-
-  // ngOnInit(): void {
-  //   console.log('cards',this.cards)
-
-  // }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['cards']) {
-      console.log('cards atualizados:', this.cards);
-    }
-  }
 
   goToPage(page: number) {
     if (page < 0 || page >= this.totalPages) return;
@@ -62,9 +48,7 @@ export class TableCardsComponent implements OnChanges {
     const cores: Record<string, string> = {
       'TRABALHADOR': 'bg-green-900/20 text-green-500',
       'COMUM': 'bg-gray-800 text-gray-400',
-      'ESTUDANTE': 'bg-blue-900/20 text-cyan-500',
-      'ATIVO': 'bg-green-900/20 text-green-400',
-      'INATIVO': 'bg-gray-800 text-gray-500',
+      'ESTUDANTE': 'bg-blue-900/20 text-cyan-500'
     };
     return base + (cores[valor] || '');
   }
@@ -87,8 +71,6 @@ export class TableCardsComponent implements OnChanges {
       this.#cardsService.patchCards(card.id).subscribe({
           next: res => {
             this.#toastr.success('Status editado com sucesso!', 'Sucesso');
-            // this.update.emit();
-
           },
           error: err => {
             this.#toastr.error('Error ao editar status!', 'Erro');

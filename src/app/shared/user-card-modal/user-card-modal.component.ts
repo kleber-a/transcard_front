@@ -20,11 +20,16 @@ import { CardsService } from '../../modules/services/cards.service';
 export class UserCardModalComponent implements OnInit {
 
   @Input() users?: User[];
-  // @Input() isOpen = false;
   @Output() isOpenChange = new EventEmitter<boolean>();
   @Output() onAddCard = new EventEmitter<Card>();
   @Output() onDeleteUser = new EventEmitter<string | number>();
   @Output() update = new EventEmitter<boolean>();
+
+  @Output() changePage = new EventEmitter<number>();
+  @Input() paginaAtual = 1;
+  @Input() totalPages = 0;
+
+
 
   #usersService = inject(UsersService);
   #cardsService = inject(CardsService);
@@ -36,18 +41,15 @@ export class UserCardModalComponent implements OnInit {
   ngOnInit() {
   }
 
-  card: any = { number: '', name: '', type: 'COMUM' };
-
   openAddCardModal(user: User) {
     this.#dialog.open(CreateCardModalComponent, {
       width: '400px',
       disableClose: true,
       data: {
-        userName: user.fullName
+        userName: user.name
       }
     }).afterClosed().subscribe(result => {
       if (result) {
-        console.log('Cartão criado:', result);
         this.#cardsService.postCards(user.id, result).subscribe({
           next: res => {
             this.#toastr.success('Cartão adicionar com sucesso!', 'Sucesso')
@@ -77,10 +79,9 @@ export class UserCardModalComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log('Usuário editado:', result);
 
         const payload: any = {
-          fullName: result.fullName,
+          name: result.name,
           email: result.email
         };
 
@@ -88,7 +89,7 @@ export class UserCardModalComponent implements OnInit {
           payload.password = result.password;
         }
 
-        this.#usersService.putUsers(payload, result.id).subscribe({
+        this.#usersService.patchUsers(payload, result.id).subscribe({
           next: res => {
             this.#toastr.success('Usuário Editado com sucesso!', 'Sucesso');
             this.update.emit();
@@ -109,12 +110,9 @@ export class UserCardModalComponent implements OnInit {
 
   setCardStatus(card: Card) {
     card.status = !card.status
-    console.log('card',card)
     this.#cardsService.patchCards(card.id).subscribe({
           next: res => {
             this.#toastr.success('Status editado com sucesso!', 'Sucesso');
-            // this.update.emit();
-
           },
           error: err => {
             this.#toastr.error('Error ao editar status!', 'Erro');
@@ -133,6 +131,23 @@ export class UserCardModalComponent implements OnInit {
             this.#toastr.error('Error ao deletar status!', 'Erro');
           }
         });
+  }
+
+    goToPage(page: number) {
+    if (page < 0 || page >= this.totalPages) return;
+    this.changePage.emit(page);
+  }
+
+  nextPage() {
+    this.goToPage(this.paginaAtual + 1);
+  }
+
+  prevPage() {
+    this.goToPage(this.paginaAtual - 1);
+  }
+
+  pagesArray(): number[] {
+    return Array.from({ length: this.totalPages }, (_, i) => i);
   }
 
 }

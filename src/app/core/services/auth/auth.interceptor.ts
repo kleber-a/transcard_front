@@ -21,7 +21,7 @@ export const authInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: 
   return next(authReq).pipe(
     catchError((error: HttpErrorResponse) => {
       if (error.status === 401) {
-        // authService.logout();
+        authService.logout();
       }
       return throwError(() => error);
     })

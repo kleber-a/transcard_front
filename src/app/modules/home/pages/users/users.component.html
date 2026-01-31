@@ -25,6 +25,9 @@
     (onAddCard)="addCard($event)"
     (onDeleteUser)="deleteUser($event)"
     (update)="setUsers()"
+    [paginaAtual]="page"
+    [totalPages]="totalPages"
+    (changePage)="onPageChange($event)"
     >
   </app-user-card-modal>
 </div>

@@ -13,13 +13,13 @@
       </thead>
 
       <tbody class="divide-y divide-gray-800/50">
-        @for (item of cards; track item.numberCard) {
+        @for (item of cards; track item.cardNumber) {
           <tr class="hover:bg-white/[0.02] transition-colors group">
-            <td class="py-4 px-2 text-sm text-gray-400 font-mono">{{ item.numberCard }}</td>
-            <td class="py-4 px-2 text-white font-semibold">{{ item.fullName }}</td>
-            <td class="py-4 px-2 text-gray-400 text-sm">{{ item.userName }}</td>
+            <td class="py-4 px-2 text-sm text-gray-400 font-mono">{{ item.cardNumber }}</td>
+            <td class="py-4 px-2 text-white font-semibold">{{ item.cardName }}</td>
+            <td class="py-4 px-2 text-gray-400 text-sm">{{ item.user.email }}</td>
             <td class="py-4 px-2">
-              <span [class]="getBadgeClass(item.typeCard)">{{ item.typeCard }}</span>
+              <span [class]="getBadgeClass(item.cardType)">{{ item.cardType }}</span>
             </td>
             <td class="py-4 px-2">
               <span [class]="getBadgeClassStatus(item.status)">{{ getLabelStatus(item.status) }}</span>

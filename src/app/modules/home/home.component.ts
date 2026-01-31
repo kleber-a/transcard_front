@@ -3,18 +3,17 @@ import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { HomeService } from '../services/home.service';
 import { User } from '../../core/models/User';
 import { AuthService } from '../../core/services/auth/auth.service';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  imports: [RouterOutlet, RouterLink]
+  imports: [RouterOutlet, RouterLink, MatIconModule]
 })
 export class HomeComponent implements OnInit {
 
-  private homeService = inject(HomeService)
-  private router = inject(Router)
-  private authService = inject(AuthService)
+  #authService = inject(AuthService)
 
   constructor() { }
 
@@ -23,8 +22,7 @@ export class HomeComponent implements OnInit {
   }
 
   logout() {
-    this.authService.logout();
-
+    this.#authService.logout();
   }
 
 }

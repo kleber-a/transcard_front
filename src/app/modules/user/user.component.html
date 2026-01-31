@@ -1,0 +1,127 @@
+<div class="min-h-screen bg-[#09090b] text-[#fafafa]">
+  <header class="border-b border-[#27272a] bg-[#09090b]/95 sticky top-0 z-10">
+    <div class="container mx-auto px-4 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="bg-[#10b981] p-1.5 rounded-lg">
+          <mat-icon class="text-white text-2xl">directions_bus</mat-icon>
+        </div>
+        <span class="font-bold tracking-tight">TransCard <span
+            class="text-[#a1a1aa] font-normal">| Portal</span></span>
+      </div>
+      <button (click)="logout()">Sair</button>
+    </div>
+  </header>
+
+  <main class="container mx-auto p-4 md:p-8 max-w-5xl">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+
+      <div class="md:col-span-4 space-y-6">
+        <div class="bg-[#09090b] border border-[#27272a] rounded-xl p-6">
+          <div class="flex flex-col items-center text-center">
+            <div
+              class="h-20 w-20 rounded-full bg-[#10b981]/10 flex items-center justify-center border border-[#10b981]/20 mb-4">
+              <span
+                class="text-3xl">{{user.name.charAt(0).toUpperCase()}}</span>
+            </div>
+            <h2 class="font-bold text-lg">{{ user.name }}</h2>
+            <p class="text-sm text-[#a1a1aa]">{{ user.email }}</p>
+          </div>
+        </div>
+
+        <div class="bg-[#09090b] border border-[#27272a] rounded-xl p-6">
+          <h3 class="text-sm font-semibold mb-4 flex items-center gap-2">
+            <mat-icon>lock</mat-icon> Perfil
+          </h3>
+          <form [formGroup]="userForm" (ngSubmit)="onSubmitUser()"
+            class="space-y-4">
+            <div class="space-y-1">
+              <label
+                class="text-[10px] uppercase tracking-wider text-[#a1a1aa]">Nome</label>
+              <input type="text" formControlName="name"
+                class="w-full bg-[#18181b] border border-[#27272a] rounded-md px-3 py-2 text-sm focus:border-[#10b981] outline-none transition-all"
+                [placeholder]="user.name">
+            </div>
+            <div class="space-y-1">
+              <label
+                class="text-[10px] uppercase tracking-wider text-[#a1a1aa] font-medium">Nova
+                Senha</label>
+              <div class="relative group">
+                <input
+                  [type]="hidePassword ? 'password' : 'text'"
+                  formControlName="password"
+                  class="w-full bg-[#18181b] border border-[#27272a] rounded-md pl-3 pr-12 py-2 text-sm text-white focus:border-[#10b981] outline-none transition-all placeholder:text-gray-600"
+                  placeholder="••••••••">
+
+                <button
+                  type="button"
+                  (click)="hidePassword = !hidePassword"
+                  class="absolute right-2 top-1/2 -translate-y-1/2 flex items-center justify-center w-8 h-8 text-[#a1a1aa] hover:text-[#10b981] transition-colors focus:outline-none"
+                  aria-label="Alternar visibilidade da senha">
+                  <mat-icon class="text-[20px] h-[20px] w-[20px]">
+                    {{ hidePassword ? 'visibility_off' : 'visibility' }}
+                  </mat-icon>
+                </button>
+              </div>
+            </div>
+            <button type="submit" [disabled]="userForm.invalid"
+              class="w-full py-2 bg-white text-black text-xs font-bold rounded-md hover:bg-gray-200 transition-colors disabled:opacity-50">
+              Atualizar Senha
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="md:col-span-8 space-y-6">
+        <div class="flex items-center justify-between">
+          <h2 class="text-xl font-bold tracking-tight">Meus Cartões</h2>
+        </div>
+
+        <div class="grid gap-4">
+          @for( card of user.cards; track card.cardNumber) {
+            <div
+              class="bg-[#09090b] border border-[#27272a] p-4 rounded-xl flex items-center justify-between group hover:border-[#a1a1aa]/50 transition-all">
+              <div class="flex items-center gap-4">
+                <div
+                  class="h-12 w-12 rounded-lg bg-[#18181b] flex items-center justify-center border border-[#27272a]">
+                  <i
+                    class="fas fa-id-card text-[#a1a1aa] group-hover:text-[#10b981] transition-colors">{{card.cardName.charAt(0).toUpperCase()}}</i>
+                </div>
+                <div>
+                  <div class="font-mono text-sm tracking-widest text-white">{{
+                    card.cardNumber }}</div>
+                  <div class="flex items-center gap-2 mt-1 w-fit">
+                    <span
+                      class="text-[10px] px-2 py-0.5 rounded bg-[#18181b] border border-[#27272a] text-[#a1a1aa]">{{
+                      card.cardType }}</span>
+                    <span class="h-1.5 w-1.5 rounded-full"
+                      [ngClass]="card.status ? 'bg-[#10b981]' : 'bg-red-500'"></span>
+                    <span class="text-[10px] text-[#a1a1aa] min-w-[50px]">{{ card.status ?
+                      'Ativo' : 'Bloqueado' }}</span>
+                  </div>
+                </div>
+                <span class="ml-5">{{card.cardName}}</span>
+              </div>
+
+              <button class="text-[#10b981] hover:text-[#34d399]"
+                [ngClass]="card.status ? 'text-green-500 hover:text-green-400' : 'text-gray-500 hover:text-gray-400'"
+                (click)="toggleStatus(card)">
+
+                <mat-icon>power_settings_new</mat-icon>
+              </button>
+            </div>
+          }
+
+          @if(user.cards?.length === 0) {
+            <div
+              class="text-center py-12 border border-dashed border-[#27272a] rounded-xl">
+              <mat-icon class="text-[#27272a] ">credit_card</mat-icon>
+              <p class="text-[#a1a1aa] text-sm">Você ainda não possui cartões
+                vinculados.</p>
+            </div>
+          }
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>

@@ -11,7 +11,12 @@ export const routes: Routes = [
   },
   {
     path: 'login',
-    loadComponent: () => import('./modules/auth/auth.component').then((p) => p.AuthComponent),
+    loadComponent: () => import('./modules/auth/auth.component').then((c) => c.AuthComponent),
+    canActivate: [loginGuard],
+  },
+  {
+    path: 'register',
+    loadComponent: () => import('./modules/register/register.component').then((c) => c.RegisterComponent),
     canActivate: [loginGuard],
   },
   {
@@ -19,4 +24,10 @@ export const routes: Routes = [
     loadChildren: () => import('./modules/home/home.routes').then(m => m.routes),
     canActivate: [authGuard]
   },
+  {
+    path: 'user',
+    loadComponent: () => import('./modules/user/user.component').then(c => c.UserComponent)
+  }
+
+
 ];

@@ -17,9 +17,9 @@ form: FormGroup;
     @Inject(MAT_DIALOG_DATA) public data: { userName: string }
   ) {
     this.form = this.fb.group({
-      numberCard: ['', [Validators.required, Validators.minLength(6)]],
-      fullName: ['', Validators.required],
-      typeCard: ['COMMON', Validators.required],
+      cardNumber: ['', [Validators.required, Validators.minLength(6)]],
+      cardName: ['', Validators.required],
+      cardType: ['COMUM', Validators.required],
     });
   }
 

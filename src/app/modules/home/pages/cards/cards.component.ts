@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { TableCardsComponent } from '../../../../shared/table-cards/table-cards.component';
 import { CardsService } from '../../../services/cards.service';
 import { finalize } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cards',
@@ -15,6 +16,7 @@ import { finalize } from 'rxjs';
 export class CardsComponent implements OnInit {
 
   #cardService = inject(CardsService)
+  #toastr = inject(ToastrService)
 
   cards: CardTable[] = [];
   filterName = '';
@@ -28,7 +30,6 @@ export class CardsComponent implements OnInit {
 
 
   ngOnInit() {
-    console.warn('aqui')
     this.getDataCards();
   }
 
@@ -40,7 +41,6 @@ export class CardsComponent implements OnInit {
       typeCard,
       status
     } = filters;
-    console.log('aquiui')
     this.#cardService.getCards({
       page,
       size,
@@ -52,10 +52,9 @@ export class CardsComponent implements OnInit {
         next: (res: any) => {
           this.cards = res.content;
           this.totalPages = res.totalPages
-          console.log('this.cards', this.cards)
         },
         error: err => {
-          console.log('error', err)
+          this.#toastr.error('Error ao listar cards!', 'Erro');
         }
       })
   }

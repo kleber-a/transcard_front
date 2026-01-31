@@ -1,0 +1,143 @@
+<div
+  class="min-h-screen flex items-center justify-center bg-[#09090b] px-4 py-12">
+  <div class="w-full max-w-[450px] space-y-6">
+
+    <div class="flex flex-col items-center text-center space-y-2">
+      <div
+        class="bg-[#10b981] p-3 rounded-xl shadow-[0_0_20px_rgba(16,185,129,0.2)] mb-2 cursor-pointer"
+        routerLink="/login">
+        <mat-icon class="text-white text-2xl">directions_bus</mat-icon>
+      </div>
+      <h1 class="text-2xl font-bold tracking-tight text-white">Criar nova
+        conta</h1>
+      <p class="text-sm text-[#a1a1aa]">Preencha os dados abaixo para começar a
+        gerenciar seus cartões</p>
+    </div>
+
+    <div class="bg-[#09090b] border border-[#27272a] p-8 rounded-xl shadow-2xl">
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()"
+        class="space-y-4">
+
+        <div class="space-y-2">
+          <label class="text-sm font-medium text-[#fafafa]">Nome
+            Completo</label>
+          <div class="relative flex items-center">
+            <mat-icon
+              class="absolute left-3  text-[#a1a1aa] text-xs">person</mat-icon>
+            <input
+              type="text"
+              formControlName="name"
+              placeholder="Ex: João Silva"
+              class="w-full pl-10 pr-4 py-2 bg-[#09090b] border border-[#27272a] rounded-md text-sm text-white focus:ring-1 focus:ring-[#10b981] focus:border-[#10b981] outline-none transition-all" />
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <label class="text-sm font-medium text-[#fafafa]">E-mail</label>
+          <div class="relative flex items-center">
+            <mat-icon
+              class="absolute left-3  text-[#a1a1aa] text-xs">
+              email
+            </mat-icon>
+            <input
+              type="email"
+              formControlName="email"
+              placeholder="exemplo@email.com"
+              class="w-full pl-10 pr-4 py-2 bg-[#09090b] border border-[#27272a] rounded-md text-sm text-white focus:ring-1 focus:ring-[#10b981] focus:border-[#10b981] outline-none transition-all" />
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <label class="text-sm font-medium text-[#fafafa]">Senha</label>
+          <div class="relative">
+            <div class="relative group flex items-center">
+              <mat-icon
+                class="absolute left-3  text-[#a1a1aa] text-xs">
+                lock
+              </mat-icon>
+              <input
+                [type]="hidePassword ? 'password' : 'text'"
+                formControlName="password"
+                placeholder="No mínimo 6 caracteres"
+                class="w-full pl-10 pr-4 py-2 bg-[#09090b] border border-[#27272a] rounded-md text-sm text-white focus:ring-1 focus:ring-[#10b981] focus:border-[#10b981] outline-none transition-all">
+
+              <button
+                type="button"
+                (click)="hidePassword = !hidePassword"
+                class="absolute right-2 top-1/2 -translate-y-1/2 flex items-center justify-center w-8 h-8 text-[#a1a1aa] hover:text-[#10b981] transition-colors focus:outline-none"
+                aria-label="Alternar visibilidade da senha">
+                <mat-icon class="text-[20px] h-[20px] w-[20px]">
+                  {{ hidePassword ? 'visibility_off' : 'visibility' }}
+                </mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <label class="text-sm font-medium text-[#fafafa]">Confirmar
+            Senha</label>
+          <div class="relative">
+            <div class="relative group flex items-center">
+              <mat-icon
+                class="absolute left-3  text-[#a1a1aa] text-xs">
+                lock
+              </mat-icon>
+              <input
+                [type]="hidePasswordRepeat ? 'password' : 'text'"
+                formControlName="confirmPassword"
+                placeholder="Repita sua senha"
+                class="w-full pl-10 pr-4 py-2 bg-[#09090b] border border-[#27272a] rounded-md text-sm text-white focus:ring-1 focus:ring-[#10b981] focus:border-[#10b981] outline-none transition-all">
+
+              <button
+                type="button"
+                (click)="hidePasswordRepeat = !hidePasswordRepeat"
+                class="absolute right-2 top-1/2 -translate-y-1/2 flex items-center justify-center w-8 h-8 text-[#a1a1aa] hover:text-[#10b981] transition-colors focus:outline-none"
+                aria-label="Alternar visibilidade da senha">
+                <mat-icon class="text-[20px] h-[20px] w-[20px]">
+                  {{ hidePasswordRepeat ? 'visibility_off' : 'visibility' }}
+                </mat-icon>
+              </button>
+            </div>
+
+          </div>
+          @if(registerForm.get('confirmPassword')?.errors?.['mismatch'] &&
+          registerForm.get('confirmPassword')?.touched) {
+
+          <p
+            class="text-xs text-red-500 mt-1">
+            As senhas não coincidem.
+          </p>
+          }
+
+        </div>
+
+        <div class="space-y-2">
+          <label class="text-sm font-medium text-[#fafafa]">Função</label>
+          <div class="relative">
+            <select
+              formControlName="role"
+              class="w-full pl-3 pr-4 py-2 bg-[#09090b] border border-[#27272a] rounded-md text-sm text-white focus:ring-1 focus:ring-[#10b981] focus:border-[#10b981] outline-none transition-all">
+              <option value="USER">Usuário</option>
+              <option value="ADMIN">Administrador</option>
+            </select>
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          [disabled]="registerForm.invalid || isLoading"
+          class="w-full bg-[#10b981] hover:bg-[#059669] disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-2.5 rounded-md transition-all shadow-lg shadow-[#10b981]/10 flex items-center justify-center gap-2 mt-4">
+          {{ isLoading ? 'Criando conta...' : 'Criar Conta' }}
+        </button>
+
+      </form>
+    </div>
+
+    <p class="text-center text-sm text-[#a1a1aa]">
+      Já tem uma conta?
+      <a routerLink="/login"
+        class="text-[#10b981] hover:underline font-semibold">Fazer login</a>
+    </p>
+  </div>
+</div>

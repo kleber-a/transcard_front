@@ -21,7 +21,7 @@ export class CreateUserModalComponent {
     this.isEdit = !!data?.user;
 
     this.form = this.fb.group({
-      fullName: [data?.user?.fullName ?? '', Validators.required],
+      name: [data?.user?.name ?? '', Validators.required],
       email: [data?.user?.email ?? '', [Validators.required, Validators.email]],
       password: [
         '',
@@ -34,7 +34,7 @@ export class CreateUserModalComponent {
     if (this.form.invalid) return;
 
     const payload = {
-      ...this.data?.user, // mantém id no editar
+      ...this.data?.user,
       ...this.form.value,
     };
 

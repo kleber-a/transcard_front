@@ -2,9 +2,9 @@ export type CardType = 'COMUM' | 'ESTUDANTE' | 'TRABALHADOR';
 
 export interface Card {
   id: number;
-  numberCard: string;
-  fullName: string;
-  typeCard: CardType;
+  cardNumber: string;
+  cardName: string;
+  cardType: CardType;
   status: boolean;
   userId: number;
 }
@@ -12,11 +12,17 @@ export interface Card {
 
 export interface CardTable {
   id?: number;
-  numberCard: string;
-  fullName: string;
-  userName: string;
-  typeCard: 'TRABALHADOR' | 'COMUM' | 'ESTUDANTE';
+  cardNumber: number;
+  cardName: string;
+  user: UserCard;
+  cardType: 'TRABALHADOR' | 'COMUM' | 'ESTUDANTE';
   status: boolean;
+}
+
+export interface UserCard {
+  id: number;
+  email: string;
+  name: string;
 }
 
 
