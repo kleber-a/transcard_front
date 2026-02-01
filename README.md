@@ -47,7 +47,7 @@ https://github.com/user-attachments/assets/fb4e6da6-989a-41f1-9442-caaf1042a349
 
 ---
 
-## ⚡ Como Rodar Localmente
+## Como Rodar Localmente
 
 ##### Front-End
 1. Entre no diretório do frontend:
