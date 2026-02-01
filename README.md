@@ -24,7 +24,7 @@ https://github.com/user-attachments/assets/fb4e6da6-989a-41f1-9442-caaf1042a349
 - Interceptação de requisições com **AuthInterceptor** (para adicionar token JWT)  
 - Gerenciamento de autenticação e sessão via **AuthService**  
 - Componentização para reutilização e manutenção do código  
-- Testes unitários  
+- **Testes unitários** 
 - Build e execução com **Angular CLI**
 
 ---
