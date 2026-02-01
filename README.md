@@ -8,6 +8,9 @@ Criar o frontend do sistema **Transcard**, responsável por gerenciar usuários 
 # Repositório principal [Transcard](https://github.com/kleber-a/transcard.git)
 
 
+O frontend do **Transcard** está hospedado no Vercel: [https://transcard-front.vercel.app](https://transcard-front.vercel.app)
+> **Observação:** O frontend hospedado no Vercel ainda está configurado para se conectar à API local (`http://localhost:8080`).  
+
 
 
 
